@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Routes, Route, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
 import Product from "./pages/Product";
@@ -15,9 +15,19 @@ import Register from "./pages/Register";
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import { Toaster } from 'react-hot-toast';
+import { AppContext } from './context/AppContext';
+import AdminLayout from './pages/admin/AdminLayout';
+import AdminLogin from './pages/admin/AdminLogin';
+import AllProducts from './pages/admin/AllProducts';
+import AddProducts from './pages/admin/AddProducts';
+import AddServices from "./pages/admin/AddServices";
+import Orders from "./pages/admin/Orders";
+import Bookings from "./pages/admin/Bookings";
+import AllServices from "./pages/admin/AllServices";
 
 function App() {
   const adminPath=useLocation().pathname.includes("admin");
+  const{admin,setAdmin}=useContext(AppContext)
   return (
     <div>
       <Toaster/>
@@ -35,6 +45,28 @@ function App() {
         <Route path="/my-orders" element={<MyOrders />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Register />} />
+
+        {/* admin routes */}
+        <Route path='/admin' element={admin?<AdminLayout/>:<AdminLogin/>}>
+          <Route index element={admin?<AllProducts/>:<AdminLogin/>}/>
+          <Route
+            path="add-product"
+            element={admin ? <AddProducts /> : <AdminLogin />}
+          />
+          <Route
+            path="add-service"
+            element={admin ? <AddServices /> : <AdminLogin />}
+          />
+          <Route
+            path="services"
+            element={admin ? <AllServices /> : <AdminLogin />}
+          />
+          <Route path="orders" element={admin ? <Orders /> : <AdminLogin />} />
+          <Route
+            path="bookings"
+            element={admin ? <Bookings /> : <AdminLogin />}
+          />
+        </Route>
       </Routes>
       {!adminPath&&<Footer/>}
 

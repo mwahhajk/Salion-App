@@ -6,6 +6,7 @@ export const AppContext=createContext();
 
 const AppContextProvider=({children})=>{
 
+    const[admin,setAdmin]=useState(true)
     const[products,setProducts]=useState([]);
     const[loading,setLoading]=useState(false);
     const[user,setUser]=useState(false);
@@ -19,7 +20,7 @@ const AppContextProvider=({children})=>{
         fetchProducts();
     },[])
 
-    const value={loading,setLoading,user,setUser,navigate,products,setProducts}
+    const value={loading,setLoading,user,setUser,navigate,products,setProducts,admin,setAdmin}
     return(
         <AppContext.Provider value={value}>
             {children}
