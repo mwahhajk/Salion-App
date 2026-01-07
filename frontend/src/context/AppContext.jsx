@@ -6,7 +6,7 @@ export const AppContext=createContext();
 
 const AppContextProvider=({children})=>{
 
-    const[admin,setAdmin]=useState(true)
+    const[admin,setAdmin]=useState(null)
     const[products,setProducts]=useState([]);
     const[loading,setLoading]=useState(false);
     const[user,setUser]=useState(false);
