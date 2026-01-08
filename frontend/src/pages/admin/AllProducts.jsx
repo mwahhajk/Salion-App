@@ -89,6 +89,7 @@ function AllProducts() {
                         {product.rating}
                       </div>
                     </td>
+                    
                     <td className='px-6 py-4'>
                       <div>
                         {product.shortDesc}
