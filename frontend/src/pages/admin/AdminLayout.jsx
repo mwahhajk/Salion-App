@@ -13,7 +13,7 @@ import {
   Menu,
 } from "lucide-react";
 import toast from 'react-hot-toast';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, Outlet, useLocation } from 'react-router-dom';
 
 function AdminLayout() {
 
@@ -143,7 +143,32 @@ function AdminLayout() {
 
 
       {/* Main Content */}
-      <div></div>
+      <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
+        <header className="bg-white shadow-sm border-b border-gray-200 lg:pl-0 pl-16">
+          <div className="flex items-center justify-between px-6 py-4">
+            <h2 className="text-2xl font-semibold text-gray-800">
+              {menuItems.find((item) => isActive(item.path, item.exact))
+                ?.name || "Admin Panel"}
+            </h2>
+            <div className="hidden md:flex items-center space-x-4">
+              <div className="text-sm text-gray-500">
+                <p
+                  onClick={logout}
+                  className="cursor-pointer hover:underline text-red-500 text-lg font-semibold"
+                >
+                  Logout
+                </p>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-50 p-6">
+          <div className="max-w-7xl mx-auto">
+            <Outlet/>
+          </div>
+        </main>
+      </div>
       </div>
   )
 }
